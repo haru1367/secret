@@ -1,0 +1,274 @@
+/*구조체 도서관리 프로그램*/
+#include< stdio.h>
+struct Book {
+	char book_name[30];
+	char book_author[30];
+	char book_publishment[30];
+	int book_borrow;
+
+};
+int main() {
+	struct Book Test[100];
+	struct Book* library;
+	library = Test;
+	int book_Num = 0;
+	
+	printf("도서관리 프로그램을 시작합니다. \n");
+	printf("------------------------\n");
+	book_admin(Test, book_Num);
+	printf("------------------------\n");
+	return 0;
+
+}
+int book_admin(struct Book* a, int book_Num) {
+	int i;
+	int select;
+	char borrow_book[30];
+	char search_book[30];
+	int number;
+	int subnumber;
+	
+	
+	printf("(1)프로그램에 책 추가하기 \n");
+	printf("(2)프로그램에 있는 책 검색하기 \n");
+	printf("(3)책 대출하기\n");
+	printf("(4)책 반납하기\n");
+	printf("(5)프로그램 종료하기\n");
+	printf("\n");
+	printf("다음 중 실행할 항목의 숫자를 입력해주세요:");
+	scanf("%d", &select);
+
+	if (select == 1) {
+		if (book_Num >= 100) {
+			printf("책을 더이상 추가할 수 없습니다.");
+			return 0;
+		}
+		printf("추가할 책의 제목을 입력해주세요:");
+		scanf("%s", a[book_Num].book_name);
+		printf("추가할 책의 작가를 입력해주세요:");
+		scanf("%s", a[book_Num].book_author);
+		printf("추가할 책의 출판사를 입력해주세요:");
+		scanf("%s", a[book_Num].book_publishment);
+
+		a[book_Num].book_borrow = 1;
+		
+		printf("\n");
+		printf("책 추가가 완료되었습니다.\n\n");
+		printf("추가된 책의 정보: %d번째 책, 제목:%s , 작가: %s, 출판사: %s \n\n", book_Num + 1, a[book_Num].book_name, a[book_Num].book_author, a[book_Num].book_publishment);
+		book_Num++;
+		
+		book_admin(a, book_Num);
+	}
+	else if (select == 2) {
+		printf("(1)책 제목으로 검색하기 \n");
+		printf("(2)책 작가로 검색하기 \n");
+		printf("(3)책 출판사로 검색하기 \n");
+		printf("\n");
+		printf("검색할 방법을 골라주세요:");
+		int search;
+		scanf("%d", &search);
+		if (search == 1) {
+			printf("\n");
+			printf("검색할 책의 제목을 입력해주세요:");
+			scanf("%s", search_book);
+			for (number = 0; number < 100;) {
+				for (subnumber = 0; subnumber < 30;) {
+					if (a[number].book_name[subnumber] == search_book[subnumber]) {
+						subnumber++;
+						if (subnumber == 30) {
+							printf("\n");
+							printf("검색하신 책의 정보: 제목:%s, 작가:%s, 출판사:%s \n\n", a[number].book_name, a[number].book_author, a[number].book_publishment);
+							number++;
+							subnumber = 0;
+							if (number == 100) {
+								printf("검색이 종료되었습니다.\n");
+								printf("\n");
+								book_admin(a, book_Num);
+							}
+
+						}
+
+					}
+
+					else if (a[number].book_name[subnumber] != search_book[subnumber]) {
+						number++;
+						subnumber = 0;
+						if (number == 100) {
+							printf("검색이 종료되었습니다.\n");
+							printf("\n");
+							book_admin(a, book_Num);
+						}
+
+					}
+				}
+
+			}
+			
+
+
+		}
+		else if (search == 2) {
+			printf("\n");
+			printf("검색할 책의 작가를 입력해주세요:");
+			scanf("%s", search_book);
+			for (number = 0; number < 100;) {
+				for (subnumber = 0; subnumber < 30;) {
+					if (a[number].book_author[subnumber] == search_book[subnumber]) {
+						subnumber++;
+						if (subnumber == 30) {
+							printf("\n");
+							printf("검색하신 책의 정보: 제목:%s, 작가:%s, 출판사:%s \n\n", a[number].book_name, a[number].book_author, a[number].book_publishment);
+							number++;
+							subnumber = 0;
+							if (number == 100) {
+								printf("검색이 종료되었습니다.\n");
+								printf("\n");
+								book_admin(a, book_Num);
+							}
+
+						}
+
+					}
+
+					else if (a[number].book_author[subnumber] != search_book[subnumber]) {
+						number++;
+						subnumber = 0;
+						if (number == 100) {
+							printf("검색이 종료되었습니다.\n");
+							printf("\n");
+							book_admin(a, book_Num);
+						}
+
+					}
+				}
+
+			}
+
+
+
+		}
+		else if (search == 3) {
+			printf("\n");
+			printf("검색할 책의 출판사를 입력해주세요:");
+			scanf("%s", search_book);
+			for (number = 0; number < 100;) {
+				for (subnumber = 0; subnumber < 30;) {
+					if (a[number].book_publishment[subnumber] == search_book[subnumber]) {
+						subnumber++;
+						if (subnumber == 30) {
+							printf("\n");
+							printf("검색하신 책의 정보: 제목:%s, 작가:%s, 출판사:%s \n\n", a[number].book_name, a[number].book_author, a[number].book_publishment);
+							number++;
+							subnumber = 0;
+							if (number == 100) {
+								printf("검색이 종료되었습니다.\n");
+								printf("\n");
+								book_admin(a, book_Num);
+							}
+
+						}
+
+					}
+
+					else if (a[number].book_publishment[subnumber] != search_book[subnumber]) {
+						number++;
+						subnumber = 0;
+						if (number == 100) {
+							printf("검색이 종료되었습니다.\n");
+							printf("\n");
+							book_admin(a, book_Num);
+						}
+
+					}
+				}
+
+			}
+
+
+
+		}
+	}
+	else if (select == 3) {
+	    printf("대출받을 책의 제목을 입력해주세요:");
+		scanf("%s", borrow_book);
+		for (number = 0; number < 100;) {
+			for (subnumber = 0; subnumber < 30;) {
+				if (a[number].book_name[subnumber] == borrow_book[subnumber]) {
+					subnumber++;
+					if (subnumber == 30) {
+						if (a[number].book_borrow == 1) {
+							printf("\n");
+							printf("%s 책이 대출되었습니다. \n\n", a[number].book_name);
+							a[number].book_borrow = 0;
+							book_admin(a, book_Num);
+						}
+						else if (a[number].book_borrow == 0) {
+							printf("\n");
+							printf("%s 책은 이미 대출된 책으로 대출이 불가능합니다.\n\n", a[number].book_name);
+							book_admin(a, book_Num);
+						}
+						
+					}
+
+				}
+
+				else if (a[number].book_name[subnumber] != search_book[subnumber]) {
+					number++;
+					subnumber = 0;
+					if (number == 100) {
+						
+						printf("\n");
+						book_admin(a, book_Num);
+					}
+
+				}
+			}
+
+		}
+
+	}
+	else if (select == 4) {
+		printf("반납받을 책의 제목을 입력해주세요:");
+		scanf("%s", borrow_book);
+		for (number = 0; number < 100;) {
+			for (subnumber = 0; subnumber < 30;) {
+				if (a[number].book_name[subnumber] == borrow_book[subnumber]) {
+					subnumber++;
+					if (subnumber == 30) {
+						if (a[number].book_borrow == 0) {
+							printf("\n");
+							printf("%s 책이 반납되었습니다. \n\n", a[number].book_name);
+							a[number].book_borrow = 1;
+							book_admin(a, book_Num);
+						}
+						else if (a[number].book_borrow == 1) {
+							printf("\n");
+							printf("%s 책은 이미 반납된 책입니다. \n\n", a[number].book_name);
+							book_admin(a, book_Num);
+						}
+
+					}
+
+				}
+
+				else if (a[number].book_name[subnumber] != search_book[subnumber]) {
+					number++;
+					subnumber = 0;
+					if (number == 100) {
+
+						printf("\n");
+						book_admin(a, book_Num);
+					}
+
+				}
+			}
+
+		}
+	}
+	else if (select == 5) {
+		printf("프로그램을 종료합니다.");
+		
+	}
+	return 1;
+
+}
