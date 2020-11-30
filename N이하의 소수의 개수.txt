@@ -1,0 +1,38 @@
+/*N이하의 소수의 개수*/
+#include <stdio.h>
+int N;
+int i;
+
+int j;
+
+
+int slave(int N) {
+	int a = 0;
+	j = 2;
+	for (i = 2; i <= N; ) {
+		if (i == j) {
+			a = a + 1;
+			i = i + 1;
+			j = 2;
+
+		}
+		else if (i != j && i % j == 0) {
+			i = i + 1;
+			j = 2;
+		} 
+		else if (i % j != 0 && j < i) {
+			j = j + 1;
+		}
+
+	}
+	
+	return a;
+}
+int main() {
+	printf("N의값:");
+	scanf("%d", &N);
+	
+	printf("N이하의 소수의 개수:%d", slave(N));
+	return 0;
+
+}
