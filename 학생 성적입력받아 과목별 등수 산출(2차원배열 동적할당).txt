@@ -1,0 +1,79 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argc, char** argv) {
+	int students, subjects , input, i , j;
+	int** arr;
+	printf("성적을 입력받을 학생수를 입력해주세요:");
+	scanf("%d", &students);
+	printf("과목 수를 입력해주세요:");
+	scanf("%d", &subjects);
+
+	printf("\n\n");
+
+	arr = (int**)malloc(sizeof(int*) * students);
+
+	for (i = 0; i < students; i++) {
+		arr[i] = (int*)malloc(sizeof(int) * subjects);
+	}
+	for (i = 0; i < students; i++) {
+		printf("%d번째 학생의 과목별 점수---\n",i+1);
+		for (j = 0; j < subjects; j++) {
+			printf("%d번째 과목의 점수 :", j + 1);
+			scanf("%d", &input);
+			printf("\n");
+
+			arr[i][j] = input;
+		}
+	}
+	gradeorder(arr, students, subjects);
+	for (i = 0; i < students; i++) {
+		free(arr[i]);
+	}
+	free(arr);
+
+
+	return 0;
+}
+int gradeorder(int(**arr), int numstudents, int numsubjects) {
+	int a, b;
+	int c;
+	int sum = 0;
+	int numsum[30];
+	
+	int k;
+	int n;
+	int g=0;
+	for (a = 0; a < numstudents; a++) {
+		for (b = 0; b < numsubjects; b++) {
+			sum += arr[a][b];
+			numsum[a] = sum;
+			
+			
+			
+		}
+		sum = 0;
+	}
+	
+	double averagegrade[30];
+	for (c = 0; c < numstudents; c++) {
+		averagegrade[c] = (double)(numsum[c] / numsubjects);
+	}
+	double max;
+	for (n = 0; n < numstudents; n++) {
+		max = 0;
+		for (k = 0; k < numstudents; k++) {
+			if (averagegrade[k] > max) {
+				max = (double)averagegrade[k];
+				g = k;
+
+			}
+		}
+		printf(" %d등의 과목별평균점수 : %f \n", n + 1, max);
+		
+		averagegrade[g] = 0;
+		
+		
+	}
+}
