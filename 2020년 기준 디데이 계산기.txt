@@ -1,0 +1,100 @@
+/* Date 계산기(2020년) */
+#include <iostream>
+class Date {
+	int year;
+	int month;
+	int day;
+	int year_date[13] = { 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365 };
+	int sub_year_date[13] = { 0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335, 366 };
+public:
+	
+
+	void SetDate(int year_, int month_, int date_) {
+		year = year_;
+		month = month_;
+		day = date_;
+	}
+	void AddDate(int inc) {
+		int today;
+		int count;
+		if ((year % 4 == 0 || year % 4 == 0) && (year % 100) != 0) {
+			today = sub_year_date[month - 1] + day + inc;
+			for (;;) {
+				today = today - 366;
+				year += 1;
+				if (today >= 1 && today <= 365) {
+					for (count = 0; count <= 11; count++) {
+						if (today >= year_date[count - 1] && today < year_date[count]) {
+							month = count;
+							day = today - year_date[count - 1];
+						}
+					}
+					break;
+
+				}
+				today = today - 365;
+				year += 1;
+				if (today >= 1 && today <= 365) {
+					for (count = 0; count <= 11; count++) {
+						if (today >= year_date[count - 1] && today < year_date[count]) {
+							month = count;
+							day = today - year_date[count - 1];
+						}
+					}
+					break;
+				}
+				today = today - 365;
+				year += 1;
+				if (today >= 1 && today <= 365) {
+					for (count = 0; count <= 11; count++) {
+						if (today >= year_date[count - 1] && today < year_date[count]) {
+							month = count;
+							day = today - year_date[count - 1];
+						}
+					}
+					break;
+				}
+				today = today - 365;
+				year += 1;
+				if (today >= 1 && today <= 366) {
+					for (count = 0; count <= 11; count++) {
+						if (today >= sub_year_date[count - 1] && today < sub_year_date[count]) {
+							month = count;
+							day = today - sub_year_date[count - 1];
+						}
+					}
+					break;
+				}
+
+
+			}
+
+		}
+		else {
+
+		}
+	}
+	void ShowDate() {
+		std::cout << year << "년" << month << "월" << day << "일" << std::endl;
+	}
+
+};
+int main() {
+	Date dday;
+	int year_put;
+	int month_put;
+	int day_put;
+	int add_day;
+	std::cout << "연도 : ";
+	std::cin >> year_put;
+	std::cout << "월 : ";
+	std::cin >> month_put;
+	std::cout << "일 : ";
+	std::cin >> day_put;
+	std::cout << "몇일 뒤 계산: ";
+	std::cin >> add_day;
+	dday.SetDate(year_put, month_put, day_put);
+	dday.AddDate(add_day);
+	dday.ShowDate();
+	return 0;
+}
