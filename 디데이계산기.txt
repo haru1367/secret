@@ -1,0 +1,382 @@
+/*디데이계산기*/
+#include <stdio.h>
+int Date;
+int year;
+int month;
+int day;
+int yearmonth1[12];
+int yearmonth2[12];
+int newyearmonth1[12];
+int newyearmonth2[12];
+int i;
+int j;
+int a; 
+int b;
+int c;
+int d=0;
+int e;
+int f;
+int g;
+int h;
+int count=0;
+int k;
+int m;
+int count2=0;
+int n;
+int x;
+int y;
+int a1;
+int a2;
+
+
+yearmonth1[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+yearmonth2[12] = { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+newyearmonth1[12] = { 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365 };
+newyearmonth2[12] = { 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335, 366 };
+
+int main() {
+	/*현재날짜 입력 */
+	printf("몇년도인지 입력해주세요:");
+	scanf("%d", &year);
+	printf("몇월인지 입력해주세요:");
+	scanf("%d", &month);
+	printf("몇일인지 입력해주세요:");
+	scanf("%d", &day);
+	printf("몇일전을 계산할까요?:");
+	scanf("%d", &a);
+	printf("몇일후를 계산할까요?:");
+	scanf("%d", &b);
+	/*1950년 1월 1일 부터 현재까지의 날짜 계산*/
+	for (c = 1950; c <= year - 1;) {
+		
+		if (((c % 4 == 0) && (c % 100 != 0)) || (c % 400 == 0)) {
+			d = d + 366;
+		}
+		else if (((c % 4 != 0) || (c % 100 == 0)) && (c % 400 != 0)) {
+			d = d + 365;
+		}
+		c++;
+	}
+	if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)) {
+		if (month == 1) {
+			d = d + day;
+		}
+		else if (month >= 2) {
+			for (e = 0; e <= month - 2; e++) {
+				d = d + yearmonth2[e];
+			}
+			d = d + day;
+		}
+	}
+	else if (((year % 4 != 0) || (year % 100 == 0)) && (year % 400 != 0)) {
+		if (month == 1) {
+			d = d + day;
+		}
+		else if (month >= 2) {
+			for (e = 0; e <= month - 2; e++) {
+				d = d + yearmonth1[e];
+			}
+			d = d + day;
+		}
+	}
+	
+	/*a일전 계산 프로그램*/
+		f = d - a;
+		
+		for (;;) {
+			f = f - 365;
+			count += 1;
+			if (f >= 1 && f <= 365) {
+				break;
+			}
+			f = f - 365;
+			count += 1;
+			if (f >= 1 && f <= 366) {
+				break;
+			}
+			f = f - 366;
+			count += 1;
+			if (f >= 1 && f <= 365) {
+				break;
+			}
+			f = f - 365;
+			count += 1;
+			if (f >= 1 && f <= 365) {
+				break;
+
+			}
+
+		}
+
+		g = 1950 + count;
+		printf("%d일 전: %d 년", a, g);
+		if (((g % 4 == 0) && (g % 100 != 0)) || (g % 400 == 0)) {
+			if (f <= 31) {
+				printf(" %d 월 %d 일", 1, f);
+				a1 = d - a;
+				if (a1 % 7 == 1) {
+					printf(" 일요일 ");
+				}
+				else if (a1 % 7 == 2) {
+					printf(" 월요일 ");
+				}
+				else if (a1 % 7 == 3) {
+					printf(" 화요일 ");
+				}
+				else if (a1 % 7 == 4) {
+					printf(" 수요일 ");
+				}
+				else if (a1 % 7 == 5) {
+					printf(" 목요일 ");
+				}
+				else if (a1 % 7 == 6) {
+					printf(" 금요일 ");
+				}
+				else if (a1 % 7 == 0) {
+					printf(" 토요일 ");
+				}
+				
+			}
+			else if (f > 31 && f <= 366) {
+				for (k = 0; k <= 11; k++) {
+					if ((newyearmonth2[k] < f) && (f <= newyearmonth2[k + 1])) {
+						printf(" %d 월 %d 일", k + 2, f - newyearmonth2[k]);
+						a1 = d - a;
+						if (a1 % 7 == 1) {
+							printf(" 일요일 ");
+						}
+						else if (a1 % 7 == 2) {
+							printf(" 월요일 ");
+						}
+						else if (a1 % 7 == 3) {
+							printf(" 화요일 ");
+						}
+						else if (a1 % 7 == 4) {
+							printf(" 수요일 ");
+						}
+						else if (a1 % 7 == 5) {
+							printf(" 목요일 ");
+						}
+						else if (a1 % 7 == 6) {
+							printf(" 금요일 ");
+						}
+						else if (a1 % 7 == 0) {
+							printf(" 토요일 ");
+						}
+						
+					}
+				}
+			}
+		}
+
+		else if (((g % 4 != 0) || (g % 100 == 0)) && (g % 400 != 0)) {
+			if (f <= 31) {
+				printf(" %d 월 %d 일", 1, f);
+				a1 = d - a;
+				if (a1 % 7 == 1) {
+					printf(" 일요일 ");
+				}
+				else if (a1 % 7 == 2) {
+					printf(" 월요일 ");
+				}
+				else if (a1 % 7 == 3) {
+					printf(" 화요일 ");
+				}
+				else if (a1 % 7 == 4) {
+					printf(" 수요일 ");
+				}
+				else if (a1 % 7 == 5) {
+					printf(" 목요일 ");
+				}
+				else if (a1 % 7 == 6) {
+					printf(" 금요일 ");
+				}
+				else if (a1 % 7 == 0) {
+					printf(" 토요일 ");
+				}
+				
+			}
+			else if (f > 31 && f <= 365) {
+				for (k = 0; k <= 11; k++) {
+					if ((newyearmonth1[k] < f) && (f <= newyearmonth1[k + 1])) {
+						printf(" %d 월 %d 일", k + 2, f - newyearmonth1[k]);
+						a1 = d - a;
+						if (a1 % 7 == 1) {
+							printf(" 일요일 ");
+						}
+						else if (a1 % 7 == 2) {
+							printf(" 월요일 ");
+						}
+						else if (a1 % 7 == 3) {
+							printf(" 화요일 ");
+						}
+						else if (a1 % 7 == 4) {
+							printf(" 수요일 ");
+						}
+						else if (a1 % 7 == 5) {
+							printf(" 목요일 ");
+						}
+						else if (a1 % 7 == 6) {
+							printf(" 금요일 ");
+						}
+						else if (a1 % 7 == 0) {
+							printf(" 토요일 ");
+						}
+						
+					}
+				}
+			}
+		}
+		
+	
+	/*b일 후 계산프로그램*/
+		m = d + b;
+		printf("\n");
+		
+		for (;;) {
+			m = m - 365;
+			count2 += 1;
+			if (m >= 1 && m <= 365) {
+				break;
+			}
+			m = m - 365;
+			count2 += 1;
+			if (m >= 1 && m <= 366) {
+				break;
+			}
+			m = m - 366;
+			count2 += 1;
+			if (m >= 1 && m <= 365) {
+				break;
+			}
+			m = m - 365;
+			count2 += 1;
+			if (m >= 1 && m <= 365) {
+				break;
+			}
+		}
+
+
+
+		n = 1950 + count2;
+		
+		printf("%d일 후: %d 년", b, n);
+		if (((n % 4 == 0) && (n % 100 != 0)) || (n % 400 == 0)) {
+			if (m <= 31) {
+				printf(" %d 월 %d 일", 1, m);
+				a2 = d + b;
+				if (a2 % 7 == 1) {
+					printf(" 일요일 ");
+				}
+				else if (a2 % 7 == 2) {
+					printf(" 월요일 ");
+				}
+				else if (a2 % 7 == 3) {
+					printf(" 화요일 ");
+				}
+				else if (a2 % 7 == 4) {
+					printf(" 수요일 ");
+				}
+				else if (a2 % 7 == 5) {
+					printf(" 목요일 ");
+				}
+				else if (a2 % 7 == 6) {
+					printf(" 금요일 ");
+				}
+				else if (a2 % 7 == 0) {
+					printf(" 토요일 ");
+				}
+				
+			}
+			else if (m > 31 && m <= 366);
+			for (k = 0; k <= 11; k++) {
+				if ((newyearmonth2[k] < m) && (m <= newyearmonth2[k + 1])) {
+					printf(" %d 월 %d 일", k + 2, m - newyearmonth2[k]);
+					a2 = d + b;
+					if (a2 % 7 == 1) {
+						printf(" 일요일 ");
+					}
+					else if (a2 % 7 == 2) {
+						printf(" 월요일 ");
+					}
+					else if (a2 % 7 == 3) {
+						printf(" 화요일 ");
+					}
+					else if (a2 % 7 == 4) {
+						printf(" 수요일 ");
+					}
+					else if (a2 % 7 == 5) {
+						printf(" 목요일 ");
+					}
+					else if (a2 % 7 == 6) {
+						printf(" 금요일 ");
+					}
+					else if (a2 % 7 == 0) {
+						printf(" 토요일 ");
+					}
+					
+				}
+			}
+		}
+		else if (((n % 4 != 0) || (n % 100 == 0)) && (n % 400 != 0)) {
+			if (m <= 31) {
+				printf(" %d 월 %d 일", 1, m);
+				a2 = d + b;
+				if (a2 % 7 == 1) {
+					printf(" 일요일 ");
+				}
+				else if (a2 % 7 == 2) {
+					printf(" 월요일 ");
+				}
+				else if (a2 % 7 == 3) {
+					printf(" 화요일 ");
+				}
+				else if (a2 % 7 == 4) {
+					printf(" 수요일 ");
+				}
+				else if (a2 % 7 == 5) {
+					printf(" 목요일 ");
+				}
+				else if (a2 % 7 == 6) {
+					printf(" 금요일 ");
+				}
+				else if (a2 % 7 == 0) {
+					printf(" 토요일 ");
+				}
+				
+			}
+			else if (m > 31 && m <= 365);
+			for (k = 0; k <= 11; k++) {
+				if ((newyearmonth1[k] < m) && (m <= newyearmonth1[k + 1])) {
+					printf(" %d 월 %d 일", k + 2, m - newyearmonth1[k]);
+					a2 = d + b;
+					if (a2 % 7 == 1) {
+						printf(" 일요일 ");
+					}
+					else if (a2 % 7 == 2) {
+						printf(" 월요일 ");
+					}
+					else if (a2 % 7 == 3) {
+						printf(" 화요일 ");
+					}
+					else if (a2 % 7 == 4) {
+						printf(" 수요일 ");
+					}
+					else if (a2 % 7 == 5) {
+						printf(" 목요일 ");
+					}
+					else if (a2 % 7 == 6) {
+						printf(" 금요일 ");
+					}
+					else if (a2 % 7 == 0) {
+						printf(" 토요일 ");
+					}
+					
+				}
+			}
+		}
+		
+	
+	
+	return 0;
+}
